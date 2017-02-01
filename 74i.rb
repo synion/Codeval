@@ -1,8 +1,9 @@
 require 'pry'
 class Coin
   def coins
-    @coins = [1,3,5]
-  end 
+    coins = [1,3,5]
+  end
+ 
 end 
 
 class Values
@@ -16,28 +17,40 @@ class Values
     @data = self.data.to_i
   end
 
+  def great_or_eq? (number)
+    self.data >= coin[number]
+  end
+
+  def division(number)
+    self.data / coin[number]
+  end
+
   def minimum_of_coin
-    coin = Coin.new.coins
     self.data_to_number
     i = 0
-    while self.data >= 1 do
-      if self.data >= coin[2]
-        i += (self.data / coin[2])
-        @data %= coin[2]
-      elsif self.data >= coin[1]
-        i += (self.data / coin[1])
-        @data %= coin[1]
-      else
-         i += (self.data / coin[0])
-         break
-      end   
+    while great_or_eq?(0) do
+      (i += division(2) 
+      @data %= coin[2]) if great_or_eq?(2) ||
+      (i += division(1) 
+      @data %= coin[1]) if great_or_eq?(1) ||
+      (i += division(0) 
+      break)   
     end  
     return i
   end
+
+  def to_s
+    "#{self.minimum_of_coin}"
+  end
+
+  private 
+    def coin
+      coin = Coin.new.coins
+    end  
 end
 
 File.open('74.txt').each_line do |line|
-  puts Values.new(line).minimum_of_coin
+  puts Values.new(line)
 end
   
  
