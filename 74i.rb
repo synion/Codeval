@@ -1,9 +1,6 @@
-require 'pry'
+
 class Coin
-  def coins
-    coins = [1,3,5]
-  end
- 
+    COINS = [1,3,5]
 end 
 
 class Values
@@ -25,9 +22,8 @@ class Values
     self.data / coin[number]
   end
 
-  def minimum_of_coin
+  def minimum_of_coin(i = 0)
     self.data_to_number
-    i = 0
     while great_or_eq?(0) do
       (i += division(2) 
       @data %= coin[2]) if great_or_eq?(2) ||
@@ -45,7 +41,7 @@ class Values
 
   private 
     def coin
-      coin = Coin.new.coins
+      coin = Coin::COINS
     end  
 end
 
